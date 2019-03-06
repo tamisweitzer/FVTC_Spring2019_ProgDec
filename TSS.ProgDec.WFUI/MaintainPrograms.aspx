@@ -12,7 +12,7 @@
         </div>
 
         <div class="control-label col-md-3">
-             <asp:DropDownList ID="ddlPrograms" runat="server" OnSelectedIndexChanged="ddlPrograms_SelectedIndexChanged"></asp:DropDownList>
+             <asp:DropDownList ID="ddlPrograms" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlPrograms_SelectedIndexChanged"></asp:DropDownList>
         </div>
     </div>
 
