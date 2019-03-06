@@ -38,3 +38,21 @@ textarea {
 .bg-dark {
     color: rebeccapurple;
 }
+
+
+.header {
+    margin: 0px;
+    padding: 0px;
+    background-color: rebeccapurple;
+}
+.header h1, .header h2, .header h3 {
+    margin: 0px;
+    padding: 0px 0px 0px 10px;
+    color: white;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.main {
+    margin: 10px;
+    border: 1px solid #eee;
+}

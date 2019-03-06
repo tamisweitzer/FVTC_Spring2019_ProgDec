@@ -71,7 +71,7 @@
             </div>
         </nav>
 
-        <div class="container body-content">
+        <div class="col-md-9 main rounded-top container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />
