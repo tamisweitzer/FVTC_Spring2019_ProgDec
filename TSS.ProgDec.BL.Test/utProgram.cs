@@ -1,5 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TSS.ProgDec.BL;
+using System.Linq;
 
 namespace TSS.ProgDec.BL.Test
 {
@@ -18,7 +20,7 @@ namespace TSS.ProgDec.BL.Test
         public void InsertTest()
         {
             Program program = new Program();
-            program.Description = "description";
+            program.Description = "New Program Test";
             program.DegreeTypeId = 1;
 
             int result = program.Insert();
@@ -34,10 +36,9 @@ namespace TSS.ProgDec.BL.Test
 
             ProgramList programs = new ProgramList();
             programs.Load();
-///////////////// left off here with doing the UT Tests. Commit at this point and start looking at Webform project
-            program = programs.Where(p=> p.Description == "description").FirstOrDefault();
+            program = programs.Where(p => p.Description == "New Program Test").FirstOrDefault();
 
-            program.Description = "description"
+            program.Description = "New Program Updated";
             program.DegreeTypeId = 1;
             program.Update();
 
@@ -45,7 +46,7 @@ namespace TSS.ProgDec.BL.Test
             updatedProgram.Id = program.Id;
             updatedProgram.LoadById();
 
-            Assert.AreEqual(program.Id, updatedProgram.ProgramId);
+            Assert.AreEqual(program.Id, updatedProgram.Id);
 
         }
 

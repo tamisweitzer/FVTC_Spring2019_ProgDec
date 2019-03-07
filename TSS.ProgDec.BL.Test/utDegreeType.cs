@@ -1,5 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TSS.ProgDec.BL;
+using System.Linq;
 
 namespace TSS.ProgDec.BL.Test
 {
@@ -9,20 +11,18 @@ namespace TSS.ProgDec.BL.Test
         [TestMethod]
         public void LoadTest()
         {
-            StudentList students = new StudentList();
-            students.Load();
-            Assert.AreEqual(5, students.Count);
+            DegreeTypeList degreeType = new DegreeTypeList();
+            degreeType.LoadById();
+            Assert.AreEqual(5, degreeType.Count);
         }
 
         [TestMethod]
         public void InsertTest()
         {
-            Student student = new Student();
-            student.FirstName = "Bart";
-            student.LastName = "Simpson";
-            student.StudentId = "123456789";
-
-            int result = student.Insert();
+            DegreeTypeList degreeType = new DegreeTypeList();
+            degreeType.Id = 1;
+            
+            int result = degreeType.Insert();
             Assert.IsTrue(result > 0);
         }
 
@@ -31,23 +31,22 @@ namespace TSS.ProgDec.BL.Test
         [TestMethod]
         public void UpdateTest()
         {
-            Student student = new Student();
+            DegreeTypeList degreeType = new DegreeTypeList();
 
-            StudentList students = new StudentList();
-            students.Load();
+            DegreeTypeList degreeTypes = new DegreeTypeList();
+            DegreeTypes.Load();
 
-            student = students.Where(s => s.FirstName == "Bart").FirstOrDefault();
+            degreeType = progDecs.Where(s => s.StudentId == 1).FirstOrDefault();
 
-            student.FirstName = "Bobby";
-            student.LastName = "Jackson";
-            student.StudentId = "123666666";
-            student.Update();
+            degreeType.StudentId = 1;
+            degreeType.ProgramId = 1;
+            degreeType.Update();
 
-            Student updatedStudent = new Student();
-            updatedStudent.Id = student.Id;
-            updatedStudent.LoadById();
+            DegreeTypeList updatedProgDec = new DegreeTypeList();
+            updatedProgDec.Id = degreeType.Id;
+            updatedProgDec.LoadById();
 
-            Assert.AreEqual(student.Id, updatedStudent.StudentId);
+            Assert.AreEqual(degreeType.Id, updatedProgDec.Id);
 
         }
 
@@ -55,14 +54,14 @@ namespace TSS.ProgDec.BL.Test
         [TestMethod]
         public void DeleteTest()
         {
-            Student student = new Student();
+            DegreeTypeList degreeType = new DegreeTypeList();
 
-            StudentList students = new StudentList();
-            students.Load();
+            ProgDecList progDecs = new ProgDecList();
+            progDecs.Load();
 
-            student = students.Where(s => s.FirstName == "Bobby").FirstOrDefault();
+            degreeType = progDecs.Where(s => s.StudentId == 1).FirstOrDefault();
 
-            int result = student.Delete();
+            int result = degreeType.Delete();
             Assert.IsTrue(result > 0);
         }
     }

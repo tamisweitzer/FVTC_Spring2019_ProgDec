@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 using TSS.ProgDec2.PL;
 
 
+
 namespace TSS.ProgDec.BL
 {
-    // remember to declare the class as public
     public class DegreeType
     {
         public int Id { get; set; }
         public string Description { get; set; }
 
-
-        public int Insert()
+        public bool Insert()
         {
             try
             {
@@ -25,14 +24,11 @@ namespace TSS.ProgDec.BL
 
                     degreeType.Id = dc.tblDegreeTypes.Any() ? dc.tblDegreeTypes.Max(s => s.Id) + 1 : 1;  // (condition) ? if{} : else{} 
                     degreeType.Description = this.Description;
-                    
-
-                    this.Id = degreeType.Id;
 
                     dc.tblDegreeTypes.Add(degreeType);
-                    return dc.SaveChanges();    // returns rows affected
+                    dc.SaveChanges();    // returns rows affected
+                    return true;
                 }
-
             }
             catch (Exception ex)
             {
@@ -51,8 +47,7 @@ namespace TSS.ProgDec.BL
                         tblDegreeType degreeType = dc.tblDegreeTypes.Where(s => s.Id == Id).FirstOrDefault();
                         if (degreeType != null)
                         {
-                            degreeType.Description = this.Description;
-                            
+                            degreeType.Description = this.Description; 
                             return dc.SaveChanges();
                         }
                         else
@@ -71,6 +66,41 @@ namespace TSS.ProgDec.BL
                 throw ex;
             }
         }
+
+
+
+        public void LoadById()
+        {
+            try
+            {
+                using (ProgDecEntities dc = new ProgDecEntities())
+                {
+                    if (Id >= 0)
+                    {
+                        tblDegreeType degreeType = dc.tblDegreeTypes.Where(s => s.Id == Id).FirstOrDefault();
+                        if (degreeType != null)
+                        {
+                            this.Id = degreeType.Id;
+                            this.Description = degreeType.Description;
+                        }
+                        else
+                        {
+                            throw new Exception("Row was not found");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("Id was not set");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+
 
         public int Delete()
         {
@@ -104,36 +134,45 @@ namespace TSS.ProgDec.BL
             }
         }
 
-        public void LoadById()
+
+
+        public class DegreeTypeList : List<DegreeType>
         {
-            try
+            public void Sort()
             {
-                using (ProgDecEntities dc = new ProgDecEntities())
+                List<DegreeType> degreeTypes = this.OrderBy(p => p.Description).ToList();
+                this.Clear();
+                this.AddRange(degreeTypes);
+            }
+            public void Load()
+            {
+                try
                 {
-                    if (Id >= 0)
+                    ProgDecEntities dc = new ProgDecEntities();
+
+                    foreach (tblDegreeType p in dc.tblDegreeTypes)
                     {
-                        tblDegreeType degreeType = dc.tblDegreeTypes.Where(s => s.Id == Id).FirstOrDefault();
-                        if (degreeType != null)
-                        {
-                            this.Id = degreeType.Id;
-                            this.Description = degreeType.Description;
-                        }
-                        else
-                        {
-                            throw new Exception("Row was not found");
-                        }
-                    }
-                    else
-                    {
-                        throw new Exception("Id was not set");
+                        // Make a DegreeType object 
+                        DegreeType degreetype = new DegreeType();
+
+                        // Fill the degreetype object properties
+                        // from values in the table
+                        degreetype.Id = p.Id;
+                        degreetype.Description = p.Description;
+
+                        // Add it to the DegreeTypeList (myself)
+                        Add(degreetype);
+
                     }
                 }
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
             }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+
+
+
         }
-    }
 }
 
