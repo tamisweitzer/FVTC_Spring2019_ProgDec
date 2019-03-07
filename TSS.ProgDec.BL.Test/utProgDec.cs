@@ -12,20 +12,21 @@ namespace TSS.ProgDec.BL.Test
         [TestMethod]
         public void LoadTest()
         {
-            ProgDecList progDec = new ProgDecList();
-            progDec.Load();
-            Assert.AreEqual(5, progDec.Count);
+            ProgDecList progDecs = new ProgDecList();
+            progDecs.Load();
+            Assert.AreEqual(4, progDecs.Count);
         }
 
         [TestMethod]
         public void InsertTest()
         {
-            ProgDec progDec = new ProgDec();
-            progDec.StudentId = 1;
-            progDec.ProgramId = 1;
+            ProgDec progdec = new ProgDec();
+            progdec.ChangeDate = DateTime.Now;
+            progdec.StudentId = -99;
+            progdec.ProgramId = 4;
 
-            int result = progDec.Insert();
-            Assert.IsTrue(result > 0);
+            bool result = progdec.Insert();
+            Assert.IsTrue(result);
         }
 
 
@@ -38,17 +39,16 @@ namespace TSS.ProgDec.BL.Test
             ProgDecList progDecs = new ProgDecList();
             progDecs.Load();
 
-            progDec = progDecs.Where(s => s.StudentId == 1).FirstOrDefault();
-
-            progDec.StudentId = 1;
-            progDec.ProgramId = 1;
+            progDec = progDecs.Where(p => p.StudentId == -99).FirstOrDefault();
+            
+            progDec.ProgramId = 5;
             progDec.Update();
 
             ProgDec updatedProgDec = new ProgDec();
             updatedProgDec.Id = progDec.Id;
             updatedProgDec.LoadById();
 
-            Assert.AreEqual(progDec.Id, updatedProgDec.Id);
+            Assert.AreEqual(progDec.ProgramId, updatedProgDec.ProgramId);
 
         }
 
@@ -61,7 +61,7 @@ namespace TSS.ProgDec.BL.Test
             ProgDecList progDecs = new ProgDecList();
             progDecs.Load();
 
-            progDec = progDecs.Where(s => s.StudentId == 1).FirstOrDefault();
+            progDec = progDecs.Where(p => p.StudentId == -99).FirstOrDefault();
 
             int result = progDec.Delete();
             Assert.IsTrue(result > 0);

@@ -13,7 +13,7 @@ namespace TSS.ProgDec.BL.Test
         {
             ProgramList programs = new ProgramList();
             programs.Load();
-            Assert.AreEqual(5, programs.Count);
+            Assert.AreEqual(16, programs.Count);
         }
 
         [TestMethod]
@@ -21,7 +21,7 @@ namespace TSS.ProgDec.BL.Test
         {
             Program program = new Program();
             program.Description = "New Program Test";
-            program.DegreeTypeId = 1;
+            program.DegreeTypeId = 3;
 
             int result = program.Insert();
             Assert.IsTrue(result > 0);
@@ -38,7 +38,6 @@ namespace TSS.ProgDec.BL.Test
             programs.Load();
             program = programs.Where(p => p.Description == "New Program Test").FirstOrDefault();
 
-            program.Description = "New Program Updated";
             program.DegreeTypeId = 1;
             program.Update();
 
@@ -46,7 +45,7 @@ namespace TSS.ProgDec.BL.Test
             updatedProgram.Id = program.Id;
             updatedProgram.LoadById();
 
-            Assert.AreEqual(program.Id, updatedProgram.Id);
+            Assert.AreEqual(program.DegreeTypeId, updatedProgram.DegreeTypeId);
 
         }
 
@@ -59,7 +58,7 @@ namespace TSS.ProgDec.BL.Test
             ProgramList programs = new ProgramList();
             programs.Load();
 
-            program = programs.Where(s => s.Description == "Bobby").FirstOrDefault();
+            program = programs.Where(s => s.Description == "New Program Test").FirstOrDefault();
 
             int result = program.Delete();
             Assert.IsTrue(result > 0);

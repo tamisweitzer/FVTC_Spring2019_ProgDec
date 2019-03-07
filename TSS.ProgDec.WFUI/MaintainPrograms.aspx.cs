@@ -43,18 +43,14 @@ namespace TSS.ProgDec.WFUI
 
         private void Rebind()
         {
-            // bind to the screen 
-            ddlPrograms.DataSource = programs;
-            ddlDegreeTypes.DataSource = degreeTypes;
-
-            // Designate the property that is shown to the user
+            ddlPrograms.DataSource = programs;  // bind to the screen 
             ddlPrograms.DataTextField = "Description";  //  shows the description of the of the program type being selected of class prop // Designate the property to use as the unique identifier
-            ddlDegreeTypes.DataTextField = "Description";
-
             ddlPrograms.DataValueField = "Id";
-            ddlDegreeTypes.DataValueField = "Id";
-
             ddlPrograms.DataBind();
+
+            ddlDegreeTypes.DataSource = degreeTypes;    // bind to the screen 
+            ddlDegreeTypes.DataTextField = "Description";
+            ddlDegreeTypes.DataValueField = "Id";
             ddlDegreeTypes.DataBind();
         }
 
@@ -101,7 +97,7 @@ namespace TSS.ProgDec.WFUI
                 {
                     // Update from database
                     program.Description = txtDescription.Text;
-                    program.DegreeTypeId[ddlDegreeTypes.SelectedIndex].Id;
+                    program.DegreeTypeId = degreeTypes[ddlDegreeTypes.SelectedIndex].Id;
 
                     program.Update();
 
@@ -112,6 +108,10 @@ namespace TSS.ProgDec.WFUI
                     Session["programs"] = programs;
 
                     Rebind();
+                }
+                else
+                {
+                    throw new Exception("Please pick a program to udpate");
                 }
             }
             catch (Exception ex)

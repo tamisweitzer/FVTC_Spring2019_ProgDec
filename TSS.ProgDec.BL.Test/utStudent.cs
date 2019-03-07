@@ -13,7 +13,7 @@ namespace TSS.ProgDec.BL.Test
         {
             StudentList students = new StudentList();
             students.Load();
-            Assert.AreEqual(5, students.Count);
+            Assert.AreEqual(9, students.Count);
         }
 
         [TestMethod]
@@ -49,7 +49,7 @@ namespace TSS.ProgDec.BL.Test
             updatedStudent.Id = student.Id;
             updatedStudent.LoadById();
 
-            Assert.AreEqual(student.Id, updatedStudent.StudentId);
+            Assert.AreEqual(student.StudentId, updatedStudent.StudentId);
 
         }
 

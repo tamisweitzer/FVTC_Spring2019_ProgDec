@@ -11,19 +11,19 @@ namespace TSS.ProgDec.BL.Test
         [TestMethod]
         public void LoadTest()
         {
-            DegreeTypeList degreeType = new DegreeTypeList();
-            degreeType.LoadById();
-            Assert.AreEqual(5, degreeType.Count);
+            DegreeTypeList degreeTypes = new DegreeTypeList();
+            degreeTypes.Load();
+            Assert.AreEqual(5, degreeTypes.Count);
         }
 
         [TestMethod]
         public void InsertTest()
         {
-            DegreeTypeList degreeType = new DegreeTypeList();
-            degreeType.Id = 1;
+            DegreeType degreeType = new DegreeType();
+            degreeType.Description = "Test Degree Type";
             
-            int result = degreeType.Insert();
-            Assert.IsTrue(result > 0);
+            bool result = degreeType.Insert();
+            Assert.IsTrue(result);
         }
 
 
@@ -31,22 +31,20 @@ namespace TSS.ProgDec.BL.Test
         [TestMethod]
         public void UpdateTest()
         {
-            DegreeTypeList degreeType = new DegreeTypeList();
+            DegreeType degreeType = new DegreeType();
 
             DegreeTypeList degreeTypes = new DegreeTypeList();
-            DegreeTypes.Load();
+            degreeTypes.Load();
 
-            degreeType = progDecs.Where(s => s.StudentId == 1).FirstOrDefault();
+            degreeType = degreeTypes.Where(p => p.Description == "Test Degree Type").FirstOrDefault();
 
-            degreeType.StudentId = 1;
-            degreeType.ProgramId = 1;
             degreeType.Update();
 
-            DegreeTypeList updatedProgDec = new DegreeTypeList();
-            updatedProgDec.Id = degreeType.Id;
-            updatedProgDec.LoadById();
+            DegreeType updatedDegreeType = new DegreeType();
+            updatedDegreeType.Id = degreeType.Id;
+            updatedDegreeType.LoadById();
 
-            Assert.AreEqual(degreeType.Id, updatedProgDec.Id);
+            Assert.AreEqual(degreeType.Description, updatedDegreeType.Description);
 
         }
 
@@ -54,12 +52,12 @@ namespace TSS.ProgDec.BL.Test
         [TestMethod]
         public void DeleteTest()
         {
-            DegreeTypeList degreeType = new DegreeTypeList();
+            DegreeType degreeType = new DegreeType();
 
-            ProgDecList progDecs = new ProgDecList();
-            progDecs.Load();
+            DegreeTypeList degreeTypes = new DegreeTypeList();
+            degreeTypes.Load();
 
-            degreeType = progDecs.Where(s => s.StudentId == 1).FirstOrDefault();
+            degreeType = degreeTypes.Where(p => p.Description == "Test Degree Type").FirstOrDefault();
 
             int result = degreeType.Delete();
             Assert.IsTrue(result > 0);

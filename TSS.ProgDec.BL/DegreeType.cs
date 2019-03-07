@@ -7,6 +7,7 @@ using TSS.ProgDec2.PL;
 
 
 
+
 namespace TSS.ProgDec.BL
 {
     public class DegreeType
@@ -22,7 +23,7 @@ namespace TSS.ProgDec.BL
                 {
                     tblDegreeType degreeType = new tblDegreeType();
 
-                    degreeType.Id = dc.tblDegreeTypes.Any() ? dc.tblDegreeTypes.Max(s => s.Id) + 1 : 1;  // (condition) ? if{} : else{} 
+                    degreeType.Id = dc.tblDegreeTypes.Any() ? dc.tblDegreeTypes.Max(p => p.Id) + 1 : 1;  // (condition) ? if{} : else{} 
                     degreeType.Description = this.Description;
 
                     dc.tblDegreeTypes.Add(degreeType);
@@ -44,10 +45,10 @@ namespace TSS.ProgDec.BL
                 {
                     if (Id >= 0)
                     {
-                        tblDegreeType degreeType = dc.tblDegreeTypes.Where(s => s.Id == Id).FirstOrDefault();
+                        tblDegreeType degreeType = dc.tblDegreeTypes.Where(p => p.Id == Id).FirstOrDefault();
                         if (degreeType != null)
                         {
-                            degreeType.Description = this.Description; 
+                            degreeType.Description = this.Description;
                             return dc.SaveChanges();
                         }
                         else
@@ -77,7 +78,7 @@ namespace TSS.ProgDec.BL
                 {
                     if (Id >= 0)
                     {
-                        tblDegreeType degreeType = dc.tblDegreeTypes.Where(s => s.Id == Id).FirstOrDefault();
+                        tblDegreeType degreeType = dc.tblDegreeTypes.Where(p => p.Id == Id).FirstOrDefault();
                         if (degreeType != null)
                         {
                             this.Id = degreeType.Id;
@@ -110,7 +111,7 @@ namespace TSS.ProgDec.BL
                 {
                     if (Id >= 0)
                     {
-                        tblDegreeType degreeType = dc.tblDegreeTypes.Where(s => s.Id == Id).FirstOrDefault();
+                        tblDegreeType degreeType = dc.tblDegreeTypes.Where(p => p.Id == Id).FirstOrDefault();
                         if (degreeType != null)
                         {
                             dc.tblDegreeTypes.Remove(degreeType);
@@ -134,45 +135,44 @@ namespace TSS.ProgDec.BL
             }
         }
 
+    }
 
 
-        public class DegreeTypeList : List<DegreeType>
+
+    public class DegreeTypeList : List<DegreeType>
+    {
+        //public void Sort()
+        //{
+        //    List<DegreeType> degreeTypes = this.OrderBy(p => p.Description).ToList();
+        //    this.Clear();
+        //    this.AddRange(degreeTypes);
+        //}
+        public void Load()
         {
-            public void Sort()
+            try
             {
-                List<DegreeType> degreeTypes = this.OrderBy(p => p.Description).ToList();
-                this.Clear();
-                this.AddRange(degreeTypes);
-            }
-            public void Load()
-            {
-                try
+                ProgDecEntities dc = new ProgDecEntities();
+
+                foreach (tblDegreeType p in dc.tblDegreeTypes)
                 {
-                    ProgDecEntities dc = new ProgDecEntities();
+                    // Make a DegreeType object 
+                    DegreeType degreetype = new DegreeType();
 
-                    foreach (tblDegreeType p in dc.tblDegreeTypes)
-                    {
-                        // Make a DegreeType object 
-                        DegreeType degreetype = new DegreeType();
+                    // Fill the degreetype object properties
+                    // from values in the table
+                    degreetype.Id = p.Id;
+                    degreetype.Description = p.Description;
 
-                        // Fill the degreetype object properties
-                        // from values in the table
-                        degreetype.Id = p.Id;
-                        degreetype.Description = p.Description;
+                    // Add it to the DegreeTypeList (myself)
+                    Add(degreetype);
 
-                        // Add it to the DegreeTypeList (myself)
-                        Add(degreetype);
-
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
                 }
             }
-
-
-
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
+    }
 }
 
