@@ -8,9 +8,7 @@ using TSS.ProgDec2.PL;
 
 namespace TSS.ProgDec.PL.Test
 {
-    /// <summary>
-    /// Summary description for utStudent
-    /// </summary>
+    
     [TestClass]
     public class utStudent
     {

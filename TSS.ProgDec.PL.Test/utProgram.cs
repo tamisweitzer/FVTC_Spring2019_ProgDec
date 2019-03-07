@@ -2,6 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TSS.ProgDec2.PL;
 using System.Linq;
+using System.Text;
+using System.Collections.Generic;
 
 namespace TSS.ProgDec.PL.Test
 {
