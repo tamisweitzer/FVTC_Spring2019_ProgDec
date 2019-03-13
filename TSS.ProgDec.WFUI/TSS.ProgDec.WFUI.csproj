@@ -126,7 +126,10 @@
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="MaintainDegreeTypes.aspx" />
+    <Content Include="MaintainProgDec.aspx" />
     <Content Include="MaintainPrograms.aspx" />
+    <Content Include="MaintainStudents.aspx" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -226,12 +229,33 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="MaintainDegreeTypes.aspx.cs">
+      <DependentUpon>MaintainDegreeTypes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MaintainDegreeTypes.aspx.designer.cs">
+      <DependentUpon>MaintainDegreeTypes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MaintainProgDec.aspx.cs">
+      <DependentUpon>MaintainProgDec.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MaintainProgDec.aspx.designer.cs">
+      <DependentUpon>MaintainProgDec.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MaintainPrograms.aspx.cs">
       <DependentUpon>MaintainPrograms.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="MaintainPrograms.aspx.designer.cs">
       <DependentUpon>MaintainPrograms.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MaintainStudents.aspx.cs">
+      <DependentUpon>MaintainStudents.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MaintainStudents.aspx.designer.cs">
+      <DependentUpon>MaintainStudents.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">

@@ -1,7 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="MaintainPrograms.aspx.cs" Inherits="TSS.ProgDec.WFUI.MaintainPrograms" %>
+﻿<%@ Page Title="Maintain Students" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="MaintainStudents.aspx.cs" Inherits="TSS.ProgDec.WFUI.MaintainStudents" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div class="header rounded-top">
+     <div class="header rounded-top">
         <h3>Maintain Programs</h3>
     </div>
 
@@ -13,27 +13,40 @@
         </div>
 
         <div class="control-label col-md-3">
-             <asp:DropDownList ID="ddlPrograms" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlPrograms_SelectedIndexChanged"></asp:DropDownList>
+             <asp:DropDownList ID="ddlStudents" 
+                 runat="server" 
+                 AutoPostBack="true" 
+                 OnSelectedIndexChanged="ddlStudents_SelectedIndexChanged"></asp:DropDownList>
         </div>
     </div>
 
     <div class="form-row ml-2 mt-2">
         <div class="control-label col-md-2">
-            <asp:Label ID="Label3" runat="server" Text="Description:"></asp:Label>
+            <asp:Label ID="Label3" runat="server" Text="First Name:"></asp:Label>
         </div>
 
         <div class="control-label col-md-3">
-                <asp:TextBox ID="txtDescription" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtFirstName" runat="server"></asp:TextBox>
         </div>
     </div>
 
     <div class="form-row ml-2 mt-2">
         <div class="control-label col-md-2">
-            <asp:Label ID="Label6" runat="server" Text="Degree Types:"></asp:Label>
+            <asp:Label ID="Label2" runat="server" Text="Last Name:"></asp:Label>
         </div>
 
         <div class="control-label col-md-3">
-             <asp:DropDownList ID="ddlDegreeTypes" runat="server"></asp:DropDownList>
+                <asp:TextBox ID="txtLastName" runat="server"></asp:TextBox>
+        </div>
+    </div>
+
+    <div class="form-row ml-2 mt-2">
+        <div class="control-label col-md-2">
+            <asp:Label ID="Label4" runat="server" Text="Student ID:"></asp:Label>
+        </div>
+
+        <div class="control-label col-md-3">
+                <asp:TextBox ID="txtStudentId" runat="server"></asp:TextBox>
         </div>
     </div>
 
@@ -42,5 +55,4 @@
         <asp:Button ID="btnUpdate" runat="server" CssClass="btn btn-primary btn-lg" Text="Update" OnClick="btnUpdate_Click" />
         <asp:Button ID="btnInsert" runat="server" CssClass="btn btn-primary btn-lg" Text="Insert" OnClick="btnInsert_Click" />
     </div>
-    
 </asp:Content>

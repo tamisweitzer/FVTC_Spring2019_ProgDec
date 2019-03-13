@@ -13,7 +13,7 @@ namespace TSS.ProgDec.BL
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string StudentId { get; set;  }
-
+        public string FullName { get { return FirstName + " " + LastName; } }
 
 
         public int Insert()

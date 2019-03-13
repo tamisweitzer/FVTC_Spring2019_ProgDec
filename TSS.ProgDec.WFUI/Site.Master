@@ -6,7 +6,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - My ASP.NET Application</title>
+    <title><%: Page.Title %> - ProgDec</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -67,6 +67,14 @@
                     <li class="nav-item">
                          <a class="nav-link" runat="server" href="~/Admin">Admin</a>
                     </li>
+
+                    <li class="nav-item">
+                         <a class="nav-link" runat="server" href="~/MaintainPrograms">Programs</a>
+                    </li>
+
+                    <li class="nav-item">
+                         <a class="nav-link" runat="server" href="~/MaintainDegreeTypes">Degree Types</a>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -76,7 +84,7 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+                <p>&copy; <%: DateTime.Now.Year %> - ASP.Net - ProgDec Classroom Project - Tami Sweitzer</p>
             </footer>
         </div>
 

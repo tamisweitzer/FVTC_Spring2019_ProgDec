@@ -12,7 +12,7 @@ namespace TSS.ProgDec.WFUI
     {
 
         ProgramList programs;
-        DegreeTypeList degreeTypes; // TODO err because this is not in BL yet
+        DegreeTypeList degreeTypes; 
         Program program;
 
 
