@@ -172,6 +172,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Band\Index.cshtml" />
     <Content Include="Views\Band\Details.cshtml" />
+    <Content Include="Views\Band\Create.cshtml" />
+    <Content Include="Views\Band\Edit.cshtml" />
+    <Content Include="Views\Band\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
