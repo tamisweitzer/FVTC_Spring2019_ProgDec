@@ -4,7 +4,7 @@ using System.Linq;
 using TSS.ProgDec2.PL;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.ComponentModel;
 
 namespace TSS.ProgDec.BL
 {
@@ -13,6 +13,7 @@ namespace TSS.ProgDec.BL
         public int Id { get; set; }
         public int StudentId { get; set; }
         public int ProgramId { get; set; }
+        [DisplayName("Change Date")]
         public DateTime ChangeDate { get; set; }
 
         public bool Insert()

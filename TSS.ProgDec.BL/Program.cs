@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,8 @@ namespace TSS.ProgDec.BL
         public int Id { get; set; }
         public string Description { get; set; }
         public int DegreeTypeId { get; set; }
+        [DisplayName("Degree Type Name")]
+        public string DegreeTypeName { get; set; }
 
 
         public int Insert()
@@ -22,10 +25,10 @@ namespace TSS.ProgDec.BL
                 {
                     tblProgram program = new tblProgram();
 
-                    program.Id = dc.tblPrograms.Any() ? dc.tblPrograms.Max(s => s.Id) + 1 : 1;  // (condition) ? if{} : else{} 
+                    program.Id = dc.tblPrograms.Any() ? dc.tblPrograms.Max(s => s.Id) + 1 : 1;  // (if condition) ? thenthis : else 
                     program.Description = this.Description;
                     program.DegreeTypeId = this.DegreeTypeId;
-                   
+
                     this.Id = program.Id;
 
                     dc.tblPrograms.Add(program);
@@ -52,7 +55,7 @@ namespace TSS.ProgDec.BL
                         {
                             program.Description = this.Description;
                             program.DegreeTypeId = this.DegreeTypeId;
-                            
+
 
                             return dc.SaveChanges();
                         }
@@ -113,14 +116,24 @@ namespace TSS.ProgDec.BL
                 {
                     if (Id >= 0)
                     {
-                        tblProgram program = dc.tblPrograms.Where(s => s.Id == Id).FirstOrDefault();
-                        if (program != null)
-                        {
-                            this.Id = program.Id;
-                            this.Description = program.Description;
-                            this.DegreeTypeId = program.DegreeTypeId;
-                            
-                        }
+                        var results = (from p in dc.tblPrograms
+                                       join dt in dc.tblDegreeTypes on p.DegreeTypeId equals dt.Id
+                                       where p.Id == this.Id
+                                       select new
+                                       {
+                                           p.Id,
+                                           p.DegreeTypeId,
+                                           p.Description,
+                                           DegreeTypeName = dt.Description
+                                       }).FirstOrDefault();
+
+                        
+                            this.Id = results.Id;
+                            this.Description = results.Description;
+                            this.DegreeTypeId = results.DegreeTypeId;
+                            this.DegreeTypeName = results.DegreeTypeName;
+
+                       // check if i am missing a bracket in this area? 
                         else
                         {
                             throw new Exception("Row was not found");
@@ -149,13 +162,27 @@ namespace TSS.ProgDec.BL
             {
                 using (ProgDecEntities dc = new ProgDecEntities())
                 {
-                    foreach (tblProgram p in dc.tblPrograms)
+                    // insert two  table join and combine them so the output can show degree type name instead of just id 
+                    var results = (from p in dc.tblPrograms
+                                   join dt in dc.tblDegreeTypes on p.DegreeTypeId equals dt.Id
+                                   orderby p.Description
+                                   select new
+                                   {
+                                       p.Id,
+                                       p.DegreeTypeId,
+                                       p.Description,
+                                       DegreeTypeName = dt.Description
+                                   }).ToList();
+
+
+
+                    foreach (var p in results)
                     {
                         Program program = new Program();
                         program.Id = p.Id;
                         program.Description = p.Description;
                         program.DegreeTypeId = p.DegreeTypeId;
-                       
+                        program.DegreeTypeName = p.DegreeTypeName;
 
                         Add(program);
                     }

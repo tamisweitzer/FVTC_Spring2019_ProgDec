@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 0px;
     padding-bottom: 20px;
 }
 
@@ -21,4 +21,49 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+/* Custom */
+
+/* Adds alternating colors to table rows */
+.table tr:nth-child(odd){
+    background-color: azure; /* lightcyan */
+}
+
+.table tr:nth-child(even) {
+    background-color: rgb(247, 247, 247);
+}
+
+
+
+/* Change color of nav bar : CSS Gradient.io */
+.bg-dark {
+    color: rebeccapurple;
+}
+
+
+.header {
+    margin: 0px;
+    padding: 0px;
+    background-color: rebeccapurple;
+}
+
+    .header h1, .header h2, .header h3 {
+        margin: 0px;
+        padding: 0px 0px 0px 10px;
+        color: white;
+        font-family: Helvetica, Arial, sans-serif;
+    }
+
+.main {
+    margin: 10px;
+    border: 1px solid #eee;
+}
+
+.sidebar {
+    border: 1px solid rebeccapurple;
+    min-height: 600px;
+    margin: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
 }
