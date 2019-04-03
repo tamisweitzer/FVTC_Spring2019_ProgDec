@@ -1,5 +1,5 @@
 ﻿body {
-    padding-top: 0px;
+    padding-top: 0;
     padding-bottom: 20px;
 }
 
@@ -26,7 +26,7 @@ textarea {
 /* Custom */
 
 /* Adds alternating colors to table rows */
-.table tr:nth-child(odd){
+.table tr:nth-child(odd) {
     background-color: azure; /* lightcyan */
 }
 
@@ -43,17 +43,17 @@ textarea {
 
 
 .header {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     background-color: rebeccapurple;
 }
 
-    .header h1, .header h2, .header h3 {
-        margin: 0px;
-        padding: 0px 0px 0px 10px;
-        color: white;
-        font-family: Helvetica, Arial, sans-serif;
-    }
+.header h1, .header h2, .header h3 {
+    margin: 0;
+    padding: 0 0 0 10px;
+    color: white;
+    font-family: Helvetica, Arial, sans-serif;
+}
 
 .main {
     margin: 10px;
@@ -64,6 +64,6 @@ textarea {
     border: 1px solid rebeccapurple;
     min-height: 600px;
     margin: 10px;
-    padding-left: 0px;
-    padding-right: 0px;
+    padding-left: 0;
+    padding-right: 0;
 }

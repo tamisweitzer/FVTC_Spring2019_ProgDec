@@ -116,6 +116,7 @@ namespace TSS.ProgDec.BL
                 {
                     if (Id >= 0)
                     {
+                        // missing an if() here?? error on line 135, '}' expected
                         var results = (from p in dc.tblPrograms
                                        join dt in dc.tblDegreeTypes on p.DegreeTypeId equals dt.Id
                                        where p.Id == this.Id
@@ -127,11 +128,15 @@ namespace TSS.ProgDec.BL
                                            DegreeTypeName = dt.Description
                                        }).FirstOrDefault();
 
-                        
+                        // does the if() go here? if (!null) 
+                        if (results != null)
+                        {
                             this.Id = results.Id;
                             this.Description = results.Description;
                             this.DegreeTypeId = results.DegreeTypeId;
                             this.DegreeTypeName = results.DegreeTypeName;
+                        }
+                            
 
                        // check if i am missing a bracket in this area? 
                         else

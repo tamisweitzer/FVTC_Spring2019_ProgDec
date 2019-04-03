@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TSS.ProgDec.BL;
+using TSS.ProgDec.MVCUI.ViewModels;
 
 namespace TSS.ProgDec.MVCUI.Controllers
 {
@@ -28,55 +29,62 @@ namespace TSS.ProgDec.MVCUI.Controllers
             Program program = new Program();
             program.Id = id;
             program.LoadById();
-            return View(program);
-            
+            return View(program);    
         }
 
         // GET: Program/Create
         public ActionResult Create()
         {
+            ProgramDegreeTypeList pdtl = new ProgramDegreeTypeList();
             Program program = new Program();
-            return View(program);
+            pdtl.Program = program;
+
+            DegreeTypeList degreeTypes = new DegreeTypeList();
+            degreeTypes.Load();
+            pdtl.DegreeTypeList = degreeTypes;
+            return View(pdtl);
         }
 
         // POST: Program/Create
         [HttpPost]
-        public ActionResult Create(Program program)
+        public ActionResult Create(ProgramDegreeTypeList pdtl)
         {
             try
             {
-                // TODO: Add insert logic here
-                program.Insert();
+                pdtl.Program.Insert();
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View(program);
+                return View(pdtl);
             }
         }
 
         // GET: Program/Edit/5
         public ActionResult Edit(int id)
         {
-            Program program = new Program();
-            program.Id = id;
-            program.LoadById();
-            return View(program);
+            ProgramDegreeTypeList pdtl = new ProgramDegreeTypeList();
+            pdtl.Program = new Program();
+            pdtl.Program.Id = id;
+            pdtl.Program.LoadById();
+
+            pdtl.DegreeTypeList = new DegreeTypeList();
+            pdtl.DegreeTypeList.Load();
+            return View(pdtl);
         }
 
         // POST: Program/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, Program program)
+        public ActionResult Edit(int id, ProgramDegreeTypeList pdtl)
         {
             try
             {
-                // TODO: Add update logic here
-                program.Update();
+                pdtl.Program.Update();
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View(program);
+                return View(pdtl.Program);
             }
         }
 
@@ -95,7 +103,6 @@ namespace TSS.ProgDec.MVCUI.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
                 program.Delete();
                 return RedirectToAction("Index");
             }

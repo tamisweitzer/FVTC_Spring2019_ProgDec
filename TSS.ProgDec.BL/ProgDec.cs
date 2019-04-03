@@ -16,6 +16,12 @@ namespace TSS.ProgDec.BL
         [DisplayName("Change Date")]
         public DateTime ChangeDate { get; set; }
 
+        [DisplayName("Program Name")]
+        public string ProgramName { get; set; }
+
+        [DisplayName("Student Name")]
+        public string StudentName { get; set; }
+
         public bool Insert()
         {
             try
@@ -85,13 +91,30 @@ namespace TSS.ProgDec.BL
                 {
                     if (Id >= 0)
                     {
-                        tblProgDec progDec = dc.tblProgDecs.Where(p => p.Id == Id).FirstOrDefault();
+                        var progDec = (from pd in dc.tblProgDecs
+                                       join p in dc.tblPrograms on pd.ProgramId equals p.Id
+                                       join s in dc.tblStudents on pd.StudentId equals s.Id
+                                       where pd.Id == this.Id
+
+                                       select new
+                                       {
+                                           pd.Id,
+                                           pd.ProgramId,
+                                           pd.StudentId,
+                                           pd.ChangeDate,
+                                           p.Description,
+                                           s.FirstName,
+                                           s.LastName
+                                       }).FirstOrDefault();
+
                         if (progDec != null)
                         {
                             this.Id = progDec.Id;
                             this.StudentId = progDec.StudentId;
                             this.ProgramId = progDec.ProgramId;
                             this.ChangeDate = progDec.ChangeDate;
+                            this.ProgramName = progDec.Description;
+                            this.StudentName = progDec.FirstName + " " + progDec.LastName;
                         }
                         else
                         {
@@ -147,7 +170,7 @@ namespace TSS.ProgDec.BL
     }
 
 
-
+    // check this code is correct 
     public class ProgDecList : List<ProgDec>
     {
         public void Load()
@@ -155,18 +178,36 @@ namespace TSS.ProgDec.BL
             try
             {
                 ProgDecEntities dc = new ProgDecEntities();
-                {
-                    foreach (tblProgDec p in dc.tblProgDecs)
-                    {
-                        ProgDec progDec = new ProgDec();
-                        progDec.Id = p.Id;
-                        progDec.StudentId = p.StudentId;
-                        progDec.ProgramId = p.ProgramId;
-                        progDec.ChangeDate = p.ChangeDate;
 
-                        Add(progDec);
-                    }
+                var results = (from pd in dc.tblProgDecs
+                               join p in dc.tblPrograms on pd.ProgramId equals p.Id
+                               join s in dc.tblStudents on pd.StudentId equals s.Id
+                               orderby pd.ChangeDate descending
+                               select new
+                               {
+                                   pd.Id,
+                                   pd.ProgramId,
+                                   pd.StudentId,
+                                   pd.ChangeDate,
+                                   p.Description,
+                                   s.FirstName,
+                                   s.LastName
+                               }).ToList();
+
+                foreach (var p in results)
+                {
+                    ProgDec progDec = new ProgDec();
+
+                    progDec.Id = p.Id;
+                    progDec.StudentId = p.StudentId;
+                    progDec.ProgramId = p.ProgramId;
+                    progDec.ChangeDate = p.ChangeDate;
+                    progDec.ProgramName = p.Description;
+                    progDec.StudentName = p.FirstName + " " + p.LastName;
+
+                    Add(progDec);
                 }
+
             }
             catch (Exception ex)
             {
