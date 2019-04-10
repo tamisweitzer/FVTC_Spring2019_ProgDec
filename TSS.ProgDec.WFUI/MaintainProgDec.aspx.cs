@@ -20,47 +20,52 @@ namespace TSS.ProgDec.WFUI
             // If not a post back, get info from database  
             if (!IsPostBack)
             {
-                programs  = new ProgDecList();          ///////////// start checking here for mistakes
-                progdecs.Load();
+                programs  = new ProgramList();          ///////////// start checking here for mistakes
+                programs.Load();
+
+                students = new StudentList();
+                students.Load();
+
                 Rebind();
 
-                Session["progdecs"] = progdecs;
+                Session["programs"] = programs;
+                Session["students"] = students;
             }
             else
             {
                 // Get the objects from session
-                progdecs = (ProgDecList)Session["progdecs"];
+                programs = (ProgramList)Session["programs"];
+                students = (StudentsList)Session["students"];
             }
         }
 
         private void Rebind()
         {
-            ddlProgDecs.DataSource = progdecs;
-            ddlProgDecs.DataTextField = "Id";
-            ddlProgDecs.DataValueField = "StudentId";
-            ddlProgDecs.DataValueField = "ProgramId";
-            ddlProgDecs.DataBind();
+            ddlPrograms.DataSource = programs;
+            ddlPrograms.DataTextField = "Description";
+            ddlPrograms.DataValueField = "Id";
+            ddlPrograms.DataBind();
+
+            ddlStudents.DataSource = students;
+            ddlStudents.DataTextField = "FullName";
+            ddlStudents.DataValueField = "Id";
+            ddlStudents.DataBind();
+
         }
 
-        protected void btnDelete_Click(object sender, EventArgs e)
-        {  
-        }
-
-        protected void btnUpdate_Click(object sender, EventArgs e)
-        {
-        }
+        
 
         protected void btnInsert_Click(object sender, EventArgs e)
         {
             try
             {
-                progDec = new B.ProgDec();
+                progDec = new BL.ProgDec();
 
-                progDec.Description = txtDescription.Text;
+                progdec.ProgramId = programs[ddlPrograms.SelectedIndex].Id;
+                progdec.StudentId = students[ddlStudents.SelectedIndex].Id;
 
-                progDec.Insert();
-                progdecs.Add(progDec);
-                Session["progdecs"] = progdecs;
+                progdec.Insert();
+
                 Rebind();
 
             }

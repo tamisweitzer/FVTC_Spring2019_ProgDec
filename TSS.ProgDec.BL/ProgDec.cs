@@ -175,6 +175,11 @@ namespace TSS.ProgDec.BL
     {
         public void Load()
         {
+            Load(null);
+        }
+
+        public void Load(int? programId)
+        {
             try
             {
                 ProgDecEntities dc = new ProgDecEntities();
@@ -182,6 +187,7 @@ namespace TSS.ProgDec.BL
                 var results = (from pd in dc.tblProgDecs
                                join p in dc.tblPrograms on pd.ProgramId equals p.Id
                                join s in dc.tblStudents on pd.StudentId equals s.Id
+                               where( pd.ProgramId == programId || programId == null)
                                orderby pd.ChangeDate descending
                                select new
                                {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TSS.ProgDec.BL;
+using TSS.ProgDec.MVCUI.ViewModels;
 
 namespace TSS.ProgDec.MVCUI.Controllers
 {
@@ -14,8 +15,26 @@ namespace TSS.ProgDec.MVCUI.Controllers
         {
             ProgDecList progdecs = new ProgDecList();
             progdecs.Load();
-            return View();
+            if (ViewBag.Message == null)
+            {
+                ViewBag.Message = "Declarations";
+            }
+            return View(progdecs);
         }
+        
+        public ActionResult Load(int id)
+        {
+            ProgDecList progdecs = new ProgDecList();
+            progdecs.Load(id);
+
+            Program program = new Program();
+            program.Id = id;
+            program.LoadById();
+
+            ViewBag.Message = "Declarations for " + program.Description;
+            return View("Index", progdecs);
+        }
+
 
         // GET: ProgDec/Details/5
         public ActionResult Details(int id)
@@ -29,46 +48,62 @@ namespace TSS.ProgDec.MVCUI.Controllers
         // GET: ProgDec/Create
         public ActionResult Create()
         {
+            ProgDecProgramsStudents pps = new ProgDecProgramsStudents();
             BL.ProgDec progdec = new BL.ProgDec();
-            return View(progdec);
+            pps.ProgDec = progdec;
+
+            pps.Programs = new ProgramList();
+            pps.Programs.Load();
+
+            pps.Students = new StudentList();
+            pps.Students.Load();
+
+            return View(pps);
         }
 
         // POST: ProgDec/Create
         [HttpPost]
-        public ActionResult Create(BL.ProgDec progdec)
+        public ActionResult Create(ProgDecProgramsStudents pps)
         {
             try
             {
-                progdec.Insert();
+                pps.ProgDec.Insert();
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View(progdec);
+                return View(pps);
             }
         }
 
         // GET: ProgDec/Edit/5
         public ActionResult Edit(int id)
         {
+            ProgDecStudents pps = new ProgDecProgramsStudents();
             BL.ProgDec progdec = new BL.ProgDec();
             progdec.Id = id;
-            progdec.LoadById();
-            return View(progdec);
+            //////////////
+            pps.Programs = new ProgramList();
+            pps.Programs.Load();
+
+            pps.Students = new StudentList();
+            pps.Students.Load();
+
+            return View(pps);
         }
 
         // POST: ProgDec/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, BL.ProgDec progdec)
+        public ActionResult Edit(int id, ProgDecProgramsStudents pps)
         {
             try
             {
-                progdec.Update();
+                pps.progdec.Update();
                 return RedirectToAction("Index");
             }
             catch
             {
-                return View(progdec);
+                return View(pps);
             }
         }
 

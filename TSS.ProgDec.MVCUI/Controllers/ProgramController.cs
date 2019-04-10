@@ -23,6 +23,18 @@ namespace TSS.ProgDec.MVCUI.Controllers
             return View(programs);
         }
 
+
+        // Load the Sidebar
+        [ChildActionOnly]
+        public ActionResult Sidebar()
+        {
+            programs = new ProgramList();
+            programs.Load();
+
+            return PartialView(programs);
+        }
+
+
         // GET: Program/Details/5
         public ActionResult Details(int id)
         {
