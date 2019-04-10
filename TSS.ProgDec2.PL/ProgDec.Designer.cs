@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\tfs\ProgDec\TSS.ProgDec2.PL\ProgDec.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\120347952\Source\Repos\ProgDec\TSS.ProgDec2.PL\ProgDec.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

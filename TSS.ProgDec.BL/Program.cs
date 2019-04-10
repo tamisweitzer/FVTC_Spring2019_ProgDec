@@ -15,7 +15,8 @@ namespace TSS.ProgDec.BL
         public int DegreeTypeId { get; set; }
         [DisplayName("Degree Type Name")]
         public string DegreeTypeName { get; set; }
-
+        [DisplayName("Image Path")]
+        public string ImagePath { get; set; }   // 
 
         public int Insert()
         {
@@ -28,6 +29,7 @@ namespace TSS.ProgDec.BL
                     program.Id = dc.tblPrograms.Any() ? dc.tblPrograms.Max(s => s.Id) + 1 : 1;  // (if condition) ? thenthis : else 
                     program.Description = this.Description;
                     program.DegreeTypeId = this.DegreeTypeId;
+                    program.ImagePath = this.ImagePath;
 
                     this.Id = program.Id;
 
@@ -55,6 +57,7 @@ namespace TSS.ProgDec.BL
                         {
                             program.Description = this.Description;
                             program.DegreeTypeId = this.DegreeTypeId;
+                            program.ImagePath = this.ImagePath;
 
 
                             return dc.SaveChanges();
@@ -125,7 +128,8 @@ namespace TSS.ProgDec.BL
                                            p.Id,
                                            p.DegreeTypeId,
                                            p.Description,
-                                           DegreeTypeName = dt.Description
+                                           DegreeTypeName = dt.Description,
+                                           p.ImagePath
                                        }).FirstOrDefault();
 
                         // does the if() go here? if (!null) 
@@ -135,6 +139,7 @@ namespace TSS.ProgDec.BL
                             this.Description = results.Description;
                             this.DegreeTypeId = results.DegreeTypeId;
                             this.DegreeTypeName = results.DegreeTypeName;
+                            this.ImagePath = results.ImagePath;
                         }
                             
 
@@ -176,7 +181,8 @@ namespace TSS.ProgDec.BL
                                        p.Id,
                                        p.DegreeTypeId,
                                        p.Description,
-                                       DegreeTypeName = dt.Description
+                                       DegreeTypeName = dt.Description,
+                                       p.ImagePath
                                    }).ToList();
 
 
@@ -188,7 +194,7 @@ namespace TSS.ProgDec.BL
                         program.Description = p.Description;
                         program.DegreeTypeId = p.DegreeTypeId;
                         program.DegreeTypeName = p.DegreeTypeName;
-
+                        program.ImagePath = p.ImagePath;
                         Add(program);
                     }
                 }

@@ -7,8 +7,11 @@
       <Diagram DiagramId="26d2fc5a9c37455ab8455a36326ac7ff" Name="Diagram1">
         <EntityTypeShape EntityType="sweitzerdbModel.tblDegreeType" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="sweitzerdbModel.tblProgDec" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="sweitzerdbModel.tblProgram" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="sweitzerdbModel.tblStudent" Width="1.5" PointX="3.375" PointY="3.75" />
+        <EntityTypeShape EntityType="sweitzerdbModel.tblAdvisor" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="sweitzerdbModel.tblProgDecAdvisor" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="sweitzerdbModel.tblProgram" Width="1.5" PointX="5.75" PointY="3.75" />
+        <EntityTypeShape EntityType="sweitzerdbModel.tblUser" Width="1.5" PointX="0.75" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

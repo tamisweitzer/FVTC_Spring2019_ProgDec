@@ -67,6 +67,9 @@
     <Build Include="Tables\tblProgram.sql" />
     <Build Include="Tables\tblProgDec.sql" />
     <Build Include="Tables\tblStudent.sql" />
+    <Build Include="Tables\tblUser.sql" />
+    <Build Include="Tables\tblAdvisor.sql" />
+    <Build Include="Tables\tblProgDecAdvisor.sql" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="Pre-Deployment\Script.PreDeployment1.sql" />
@@ -76,6 +79,8 @@
     <None Include="Post-Deployment\DefaultData\Students.sql" />
     <None Include="Post-Deployment\DefaultData\ProgDecs.sql" />
     <None Include="Post-Deployment\DefaultData\Programs.sql" />
+    <None Include="Post-Deployment\DefaultData\Advisors.sql" />
+    <None Include="Post-Deployment\DefaultData\ProgDecAdvisors.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Post-Deployment\Script.PostDeployment1.sql" />

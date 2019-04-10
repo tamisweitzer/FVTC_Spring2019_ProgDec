@@ -27,7 +27,10 @@ namespace TSS.ProgDec2.PL
     
         public virtual DbSet<tblDegreeType> tblDegreeTypes { get; set; }
         public virtual DbSet<tblProgDec> tblProgDecs { get; set; }
-        public virtual DbSet<tblProgram> tblPrograms { get; set; }
         public virtual DbSet<tblStudent> tblStudents { get; set; }
+        public virtual DbSet<tblAdvisor> tblAdvisors { get; set; }
+        public virtual DbSet<tblProgDecAdvisor> tblProgDecAdvisors { get; set; }
+        public virtual DbSet<tblProgram> tblPrograms { get; set; }
+        public virtual DbSet<tblUser> tblUsers { get; set; }
     }
 }

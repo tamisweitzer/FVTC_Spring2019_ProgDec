@@ -79,7 +79,7 @@ namespace TSS.ProgDec.MVCUI.Controllers
         // GET: ProgDec/Edit/5
         public ActionResult Edit(int id)
         {
-            ProgDecStudents pps = new ProgDecProgramsStudents();
+            ProgDecProgramsStudents pps = new ProgDecProgramsStudents();
             BL.ProgDec progdec = new BL.ProgDec();
             progdec.Id = id;
             //////////////
@@ -98,7 +98,7 @@ namespace TSS.ProgDec.MVCUI.Controllers
         {
             try
             {
-                pps.progdec.Update();
+                pps.ProgDec.Update();
                 return RedirectToAction("Index");
             }
             catch

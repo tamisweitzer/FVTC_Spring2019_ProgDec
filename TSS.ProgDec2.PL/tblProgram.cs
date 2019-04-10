@@ -17,5 +17,6 @@ namespace TSS.ProgDec2.PL
         public int Id { get; set; }
         public string Description { get; set; }
         public int DegreeTypeId { get; set; }
+        public string ImagePath { get; set; }
     }
 }

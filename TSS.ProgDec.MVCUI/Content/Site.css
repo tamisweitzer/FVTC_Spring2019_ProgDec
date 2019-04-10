@@ -27,11 +27,11 @@ textarea {
 
 /* Adds alternating colors to table rows */
 .table tr:nth-child(odd) {
-    background-color: azure; /* lightcyan */
+    background-color: #fff;
 }
 
 .table tr:nth-child(even) {
-    background-color: rgb(247, 247, 247);
+    background-color: ghostwhite;
 }
 
 
@@ -66,9 +66,20 @@ textarea {
     margin: 10px;
     padding-left: 0;
     padding-right: 0;
+   
+}
+
+.sidebar-content {
+    margin-top: 2em; 
 }
 
 .sidebar a {
-    padding-left: 10px;
-    padding-right: 5px;
+    padding: 10px;
+    font-size: 0.8em;
+}
+
+
+.imageprop {
+   width: 100px;
+   height: 75px;
 }

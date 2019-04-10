@@ -35,7 +35,7 @@ namespace TSS.ProgDec.WFUI
             {
                 // Get the objects from session
                 programs = (ProgramList)Session["programs"];
-                students = (StudentsList)Session["students"];
+                students = (StudentList)Session["students"];
             }
         }
 
