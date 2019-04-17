@@ -14,7 +14,7 @@ namespace TSS.ProgDec.MVCUI.Controllers
         {
             StudentList students = new StudentList();
             students.Load();
-            return View();
+            return View(students);
         }
 
         // GET: Student/Details/5

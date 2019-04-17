@@ -58,6 +58,7 @@ textarea {
 .main {
     margin: 10px;
     border: 1px solid #eee;
+    padding: 0px;
 }
 
 .sidebar {
