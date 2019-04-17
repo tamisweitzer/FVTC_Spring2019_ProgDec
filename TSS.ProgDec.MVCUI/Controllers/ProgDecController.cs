@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TSS.ProgDec.BL;
 using TSS.ProgDec.MVCUI.ViewModels;
+using TSS.ProgDec.MVCUI.Models;
 
 namespace TSS.ProgDec.MVCUI.Controllers
 {
@@ -13,13 +14,20 @@ namespace TSS.ProgDec.MVCUI.Controllers
         // GET: ProgDec
         public ActionResult Index()
         {
-            ProgDecList progdecs = new ProgDecList();
-            progdecs.Load();
-            if (ViewBag.Message == null)
+            if (Authenticate.IsAuthenticated())
             {
-                ViewBag.Message = "Declarations";
+                ProgDecList progdecs = new ProgDecList();
+                progdecs.Load();
+                if (ViewBag.Message == null)
+                {
+                    ViewBag.Message = "Declarations";
+                }
+                return View(progdecs);
             }
-            return View(progdecs);
+          else
+            {
+                return RedirectToAction("Create", "Login", new { returnurl = HttpContext.Request.Url });
+            }  
         }
         
         public ActionResult Load(int id)

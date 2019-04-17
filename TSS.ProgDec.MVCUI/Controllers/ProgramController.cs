@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using TSS.ProgDec.BL;
 using TSS.ProgDec.MVCUI.ViewModels;
+using TSS.ProgDec.MVCUI.Models; 
 
 namespace TSS.ProgDec.MVCUI.Controllers
 {
@@ -14,13 +15,25 @@ namespace TSS.ProgDec.MVCUI.Controllers
         ProgramList programs;
 
         // GET: Program
+        /// <summary>
+        /// //////////////
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Index()
         {
-            // get model : instantiate obj > load it > return it  also, remember to make a view (right click on Index())
-            programs = new ProgramList();
-            programs.Load();
-      
-            return View(programs);
+            if (Authenticate.IsAuthenticated())   
+            {
+                // get model : instantiate obj > load it > return it  also, remember to make a view (right click on Index())
+                programs = new ProgramList();
+                programs.Load();
+
+                return View(programs);
+            }
+            else
+            {
+                return RedirectToAction("Create", "Login", new { returnurl = HttpContext.Request.Url });
+            }
+            
         }
 
 

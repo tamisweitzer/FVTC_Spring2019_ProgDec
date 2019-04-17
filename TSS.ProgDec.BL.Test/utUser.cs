@@ -15,5 +15,13 @@ namespace TSS.ProgDec.BL.Test
             user.Seed();
             Assert.IsTrue(true);
         }
+
+        [TestMethod]
+        public void LoginPassTest()
+        {
+            User user = new User("tami", "maple");
+            bool actual = user.Login();
+            Assert.IsTrue(actual);
+        }
     }
 }
