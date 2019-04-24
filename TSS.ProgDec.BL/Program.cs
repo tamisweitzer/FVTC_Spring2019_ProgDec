@@ -166,6 +166,11 @@ namespace TSS.ProgDec.BL
 
     public class ProgramList : List<Program>
     {
+        /// <summary>
+        /// ///////////////////// check loadbydegreetypeid () 
+        /// </summary>
+        /// 
+
         public void Load()
         {
             try

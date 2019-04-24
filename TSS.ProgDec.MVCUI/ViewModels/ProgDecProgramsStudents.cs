@@ -11,5 +11,12 @@ namespace TSS.ProgDec.MVCUI.ViewModels
         public BL.ProgDec ProgDec { get; set; }
         public StudentList Students { get; set; }
         public ProgramList Programs { get; set;  }
+
+        // List of all advisors 
+        public AdvisorList Advisors { get; set; }
+
+        // list of all pre-existing advisors (Ids)
+        public IEnumerable<int> AdvisorIds { get; set; }
+
     }
 }

@@ -1,0 +1,17 @@
+﻿@model TSS.ProgDec.BL.ShoppingCart
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+           Count
+        </dt>
+
+        <dd>
+            @{ 
+                int count = Model.TotalCount;
+                @Html.ActionLink(count.ToString() + " items", "Index");
+            }
+        </dd>
+    </dl>
+</div>
+

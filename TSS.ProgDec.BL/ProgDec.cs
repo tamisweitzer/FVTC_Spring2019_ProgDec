@@ -15,12 +15,49 @@ namespace TSS.ProgDec.BL
         public int ProgramId { get; set; }
         [DisplayName("Change Date")]
         public DateTime ChangeDate { get; set; }
-
         [DisplayName("Program Name")]
         public string ProgramName { get; set; }
-
         [DisplayName("Student Name")]
         public string StudentName { get; set; }
+        public AdvisorList Advisors { get; set; }
+
+
+        public ProgDec()
+        {
+            Advisors = new AdvisorList();
+        }
+
+        public void LoadAdvisors()
+        {
+            try
+            {
+                //ProgDecEntities dc = new ProgDecEntities();
+                //Advisors.Clear();
+                //var advisors = from pda in dc.tblProgDecAdvisors
+                //               join a in dc.tblAdvisors on pda.AdvisorId equals a.Id
+                //               where pda.ProgDecId == this.Id
+                //               select new
+                //               {
+                //                   a.Id,
+                //                   a.Name
+                //               };
+
+                //foreach(var advisor in advisors)
+                //{
+                //    Advisor a = new Advisor(advisor.Id, advisor.Name);
+                //    this.Advisors.Add(a);
+                //}
+
+                Advisors = new AdvisorList();
+                Advisors.LoadByProgDecId(this.Id);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
 
         public bool Insert()
         {
@@ -115,6 +152,7 @@ namespace TSS.ProgDec.BL
                             this.ChangeDate = progDec.ChangeDate;
                             this.ProgramName = progDec.Description;
                             this.StudentName = progDec.FirstName + " " + progDec.LastName;
+                            LoadAdvisors();
                         }
                         else
                         {
@@ -164,13 +202,9 @@ namespace TSS.ProgDec.BL
                 throw ex;
             }
         }
-
-
-
     }
 
 
-    // check this code is correct 
     public class ProgDecList : List<ProgDec>
     {
         public void Load()

@@ -1,0 +1,39 @@
+﻿@model TSS.ProgDec.BL.ShoppingCart
+
+@{
+    ViewBag.Title = "Shopping Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <tr>
+        <th>
+           Change Date
+        </th>
+        <th>
+           ProgramName
+        </th>
+        <th>
+            Student Name
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Items) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ChangeDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProgramName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StudentName)
+        </td>
+        <td>
+            @Html.ActionLink("Remove", "RemoveFromCart", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

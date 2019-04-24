@@ -139,6 +139,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProgDecController.cs" />
     <Compile Include="Controllers\ProgramController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\StudentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -248,6 +249,8 @@
     <Content Include="Views\Program\Sidebar.cshtml" />
     <Content Include="Views\Login\Create.cshtml" />
     <Content Include="Views\Login\Logout.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\ShoppingCart\CartDisplay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -75,7 +75,11 @@ namespace TSS.ProgDec.MVCUI.Controllers
         {
             try
             {
+                // /// ///////////
                 pps.ProgDec.Insert();
+                int id = pps.ProgDec.Id;
+                pps.AdvisorIds.ToList().ForEach(a => ProgDecAdvisor.Add(id, a));
+                              
                 return RedirectToAction("Index");
             }
             catch
@@ -97,15 +101,59 @@ namespace TSS.ProgDec.MVCUI.Controllers
             pps.Students = new StudentList();
             pps.Students.Load();
 
+            // Load all advisors 
+            //////////////// this gets added somewhere else too? 7:12pm
+            pps.Advisors = new AdvisorList();
+            pps.Advisors.Load();
+
+            // Deal with the existing advisors
+            IEnumerable<int> existingAdvisorIds = new List<int>();
+            
+            // Select only the IDs
+            existingAdvisorIds = pps.ProgDec.Advisors.Select(a => a.Id);
+            pps.AdvisorIds = existingAdvisorIds;
+
+            // 
+            Session["advisorsids"] = existingAdvisorIds; 
+
             return View(pps);
         }
 
+
+      
         // POST: ProgDec/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, ProgDecProgramsStudents pps)
         {
             try
             {
+                // ///////////////////
+                // Deal with the advisors
+                IEnumerable<int> oldadvisorsid = new List<int>();
+                if (Session["advisorids"] != null)
+                {
+                    oldadvisorsid = (IEnumerable<int>)Session["advisorids"];
+                }
+
+                IEnumerable<int> newadvisorids = new List<int>();
+                if (pps.AdvisorIds != null)
+                {
+                    newadvisorids = pps.AdvisorIds;
+                }
+
+                // Identify the deletes
+                IEnumerable<int> deletes = oldadvisorsid.Except(newadvisorids);
+
+                // Identify the adds
+                IEnumerable<int> adds = newadvisorids.Except(oldadvisorsid);
+
+                // Do the deletes
+                deletes.ToList().ForEach(d => ProgDecAdvisor.Delete(id, d));
+
+                // Do the adds
+                adds.ToList().ForEach(a => ProgDecAdvisor.Add(id, a));
+
+
                 pps.ProgDec.Update();
                 return RedirectToAction("Index");
             }
