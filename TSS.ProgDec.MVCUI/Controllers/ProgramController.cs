@@ -5,7 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using TSS.ProgDec.BL;
 using TSS.ProgDec.MVCUI.ViewModels;
-using TSS.ProgDec.MVCUI.Models; 
+using TSS.ProgDec.MVCUI.Models;
+using System.IO;
 
 namespace TSS.ProgDec.MVCUI.Controllers
 {
@@ -76,6 +77,22 @@ namespace TSS.ProgDec.MVCUI.Controllers
         {
             try
             {
+                if (pdtl.File != null)
+                {
+                    pdtl.Program.ImagePath = pdtl.File.FileName;
+                    string target = Path.Combine(Server.MapPath("~/images"), Path.GetFileName(pdtl.File.FileName));
+
+                    if (!System.IO.File.Exists(target))
+                    {
+                        pdtl.File.SaveAs(target);
+                        ViewBag.Message = "File uploaded successfully";
+                    }
+                    else
+                    {
+                        ViewBag.Message = "File already exists";
+                    }
+                }
+
                 pdtl.Program.Insert();
                 return RedirectToAction("Index");
             }
@@ -104,6 +121,22 @@ namespace TSS.ProgDec.MVCUI.Controllers
         {
             try
             {
+                if (pdtl.File != null)
+                {
+                    pdtl.Program.ImagePath = pdtl.File.FileName;
+                    string target = Path.Combine(Server.MapPath("~/images"), Path.GetFileName(pdtl.File.FileName));
+
+                    if (!System.IO.File.Exists(target))
+                    {
+                        pdtl.File.SaveAs(target);
+                        ViewBag.Message = "File uploaded successfully";
+                    }
+                    else
+                    {
+                        ViewBag.Message = "File already exists";
+                    }
+                }
+
                 pdtl.Program.Update();
                 return RedirectToAction("Index");
             }

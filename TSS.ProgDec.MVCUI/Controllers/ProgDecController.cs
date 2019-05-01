@@ -60,11 +60,16 @@ namespace TSS.ProgDec.MVCUI.Controllers
             BL.ProgDec progdec = new BL.ProgDec();
             pps.ProgDec = progdec;
 
-            pps.Programs = new ProgramList();
-            pps.Programs.Load();
+            ProgramList programs = new ProgramList();
+            programs.Load();
+            pps.Programs = programs;
 
-            pps.Students = new StudentList();
-            pps.Students.Load();
+            StudentList students = new StudentList();
+            students.Load();
+            pps.Students = students;
+
+            pps.Advisors = new AdvisorList();
+            pps.Advisors.Load();
 
             return View(pps);
         }
@@ -75,7 +80,6 @@ namespace TSS.ProgDec.MVCUI.Controllers
         {
             try
             {
-                // /// ///////////
                 pps.ProgDec.Insert();
                 int id = pps.ProgDec.Id;
                 pps.AdvisorIds.ToList().ForEach(a => ProgDecAdvisor.Add(id, a));
@@ -94,27 +98,30 @@ namespace TSS.ProgDec.MVCUI.Controllers
             ProgDecProgramsStudents pps = new ProgDecProgramsStudents();
             BL.ProgDec progdec = new BL.ProgDec();
             progdec.Id = id;
-            //////////////
-            pps.Programs = new ProgramList();
-            pps.Programs.Load();
+            progdec.LoadById();
+           
+            pps.ProgDec = progdec;
 
-            pps.Students = new StudentList();
-            pps.Students.Load();
+            ProgramList programs = new ProgramList();
+            programs.Load();
+            pps.Programs = programs;
 
-            // Load all advisors 
-            //////////////// this gets added somewhere else too? 7:12pm
+            StudentList students = new StudentList();
+            students.Load();
+            pps.Students = students;
+
+            // Load all
             pps.Advisors = new AdvisorList();
             pps.Advisors.Load();
 
             // Deal with the existing advisors
-            IEnumerable<int> existingAdvisorIds = new List<int>();
-            
-            // Select only the IDs
-            existingAdvisorIds = pps.ProgDec.Advisors.Select(a => a.Id);
-            pps.AdvisorIds = existingAdvisorIds;
+            IEnumerable<int> existingAdvisorsIds = new List<int>();
 
-            // 
-            Session["advisorsids"] = existingAdvisorIds; 
+            // Select only the Ids
+            existingAdvisorsIds = pps.ProgDec.Advisors.Select(a => a.Id);
+            pps.AdvisorIds = existingAdvisorsIds;
+
+            Session["advisorids"] = existingAdvisorsIds;
 
             return View(pps);
         }
@@ -127,7 +134,6 @@ namespace TSS.ProgDec.MVCUI.Controllers
         {
             try
             {
-                // ///////////////////
                 // Deal with the advisors
                 IEnumerable<int> oldadvisorsid = new List<int>();
                 if (Session["advisorids"] != null)

@@ -10,5 +10,8 @@ namespace TSS.ProgDec.MVCUI.ViewModels
     {
         public Program Program { get; set; }
         public DegreeTypeList DegreeTypeList { get; set; }
+
+        public HttpPostedFileBase File { get; set; }
+
     }
 }
