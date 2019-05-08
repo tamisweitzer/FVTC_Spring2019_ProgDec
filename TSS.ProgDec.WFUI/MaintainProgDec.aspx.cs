@@ -20,7 +20,7 @@ namespace TSS.ProgDec.WFUI
             // If not a post back, get info from database  
             if (!IsPostBack)
             {
-                programs  = new ProgramList();          ///////////// start checking here for mistakes
+                programs  = new ProgramList();
                 programs.Load();
 
                 students = new StudentList();
