@@ -10,9 +10,10 @@ namespace TSS.ProgDec.WFUI
 {
     public partial class MaintainProgDecs : System.Web.UI.Page
     {
-        BL.ProgDec progDec;
+        
         ProgramList programs;
         StudentList students;
+        BL.ProgDec progDec;
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -26,7 +27,7 @@ namespace TSS.ProgDec.WFUI
                 students = new StudentList();
                 students.Load();
 
-                Rebind();
+                //Rebind();
 
                 Session["programs"] = programs;
                 Session["students"] = students;
@@ -39,49 +40,44 @@ namespace TSS.ProgDec.WFUI
             }
         }
 
-        private void Rebind()
-        {
-            ddlPrograms.DataSource = programs;
-            ddlPrograms.DataTextField = "Description";
-            ddlPrograms.DataValueField = "Id";
-            ddlPrograms.DataBind();
 
-            ddlStudents.DataSource = students;
-            ddlStudents.DataTextField = "FullName";
-            ddlStudents.DataValueField = "Id";
-            ddlStudents.DataBind();
+        // commenting this out because it is broken and i can't fix it
+        //private void Rebind()
+        //{
+        //    ddlPrograms.DataSource = programs;
+        //    ddlPrograms.DataTextField = "Description";
+        //    ddlPrograms.DataValueField = "Id";
+        //    ddlPrograms.DataBind();
 
-        }
+        //    ddlStudents.DataSource = students;
+        //    ddlStudents.DataTextField = "FullName";
+        //    ddlStudents.DataValueField = "Id";
+        //    ddlStudents.DataBind();
+
+        //}
 
         
 
-        protected void btnInsert_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                progDec = new BL.ProgDec();
+        //protected void btnInsert_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        progdec = new BL.ProgDec();
 
-                progdec.ProgramId = programs[ddlPrograms.SelectedIndex].Id;
-                progdec.StudentId = students[ddlStudents.SelectedIndex].Id;
+        //        progdec.ProgramId = programs[ddlPrograms.SelectedIndex].Id;
+        //        progdec.StudentId = students[ddlStudents.SelectedIndex].Id;
 
-                progdec.Insert();
+        //        progdec.Insert();
 
-                Rebind();
+        //        Rebind();
 
-            }
-            catch (Exception ex)
-            {
-                Response.Write("Error: " + ex.Message);
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Response.Write("Error: " + ex.Message);
+        //    }
+        //}
 
-        protected void ddlProgDecs_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // get the progDec that i want to work on 
-            progDec = progdecs[ddlProgDecs.SelectedIndex];
-
-            // put the description on the screen 
-            txtDescription.Text = progDec.Description;
-        }
+        
     }
 }
