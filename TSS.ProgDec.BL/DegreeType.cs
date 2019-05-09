@@ -140,13 +140,7 @@ namespace TSS.ProgDec.BL
 
 
     public class DegreeTypeList : List<DegreeType>
-    {
-        //public void Sort()
-        //{
-        //    List<DegreeType> degreeTypes = this.OrderBy(p => p.Description).ToList();
-        //    this.Clear();
-        //    this.AddRange(degreeTypes);
-        //}
+    { 
         public void Load()
         {
             try
@@ -155,17 +149,12 @@ namespace TSS.ProgDec.BL
 
                 foreach (tblDegreeType p in dc.tblDegreeTypes)
                 {
-                    // Make a DegreeType object 
                     DegreeType degreetype = new DegreeType();
-
-                    // Fill the degreetype object properties
-                    // from values in the table
+                    
                     degreetype.Id = p.Id;
                     degreetype.Description = p.Description;
-
-                    // Add it to the DegreeTypeList (myself)
+                    
                     Add(degreetype);
-
                 }
             }
             catch (Exception ex)

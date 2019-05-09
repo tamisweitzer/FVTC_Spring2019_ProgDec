@@ -267,10 +267,14 @@
     <Content Include="Views\Login\Logout.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\ShoppingCart\CartDisplay.cshtml" />
+    <Content Include="Views\DegreeTypes\Index.cshtml" />
+    <Content Include="Views\DegreeTypes\Details.cshtml" />
+    <Content Include="Views\DegreeTypes\Create.cshtml" />
+    <Content Include="Views\DegreeTypes\Edit.cshtml" />
+    <Content Include="Views\DegreeTypes\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\DegreeTypes\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

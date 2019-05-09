@@ -11,12 +11,16 @@ namespace TSS.ProgDec.BL
     public class Student
     {
         public int Id { get; set; }
+
         [DisplayName("First Name")]
         public string FirstName { get; set; }
+
         [DisplayName("Last Name")]
         public string LastName { get; set; }
+
         [DisplayName("Student Id")]
         public string StudentId { get; set;  }
+
         [DisplayName("Full Name")]
         public string FullName { get { return FirstName + " " + LastName; } }
 

@@ -13,12 +13,16 @@ namespace TSS.ProgDec.BL
         public int Id { get; set; }
         public int StudentId { get; set; }
         public int ProgramId { get; set; }
+
         [DisplayName("Change Date")]
         public DateTime ChangeDate { get; set; }
+
         [DisplayName("Program Name")]
         public string ProgramName { get; set; }
+
         [DisplayName("Student Name")]
         public string StudentName { get; set; }
+
         public AdvisorList Advisors { get; set; }
 
 
@@ -31,29 +35,11 @@ namespace TSS.ProgDec.BL
         {
             try
             {
-                //ProgDecEntities dc = new ProgDecEntities();
-                //Advisors.Clear();
-                //var advisors = from pda in dc.tblProgDecAdvisors
-                //               join a in dc.tblAdvisors on pda.AdvisorId equals a.Id
-                //               where pda.ProgDecId == this.Id
-                //               select new
-                //               {
-                //                   a.Id,
-                //                   a.Name
-                //               };
-
-                //foreach(var advisor in advisors)
-                //{
-                //    Advisor a = new Advisor(advisor.Id, advisor.Name);
-                //    this.Advisors.Add(a);
-                //}
-
                 Advisors = new AdvisorList();
                 Advisors.LoadByProgDecId(this.Id);
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
@@ -70,9 +56,11 @@ namespace TSS.ProgDec.BL
                     progDec.Id = dc.tblProgDecs.Any() ? dc.tblProgDecs.Max(p => p.Id) + 1 : 1;  // (condition) ? if{} : else{} 
                     progDec.StudentId = this.StudentId;
                     progDec.ProgramId = this.ProgramId;
+                    progDec.ChangeDate = DateTime.Now;
+                    this.Id = progDec.Id;
 
                     dc.tblProgDecs.Add(progDec);
-                    dc.SaveChanges();    // returns rows affected
+                    dc.SaveChanges();  
                     return true;
                 }
 

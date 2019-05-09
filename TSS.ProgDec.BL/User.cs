@@ -93,7 +93,6 @@ namespace TSS.ProgDec.BL
             }
             catch (Exception ex )
             {
-
                 throw ex;
             }
         }

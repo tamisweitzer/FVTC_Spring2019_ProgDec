@@ -30,7 +30,6 @@ namespace TSS.ProgDec.BL
                     program.Description = this.Description;
                     program.DegreeTypeId = this.DegreeTypeId;
                     program.ImagePath = this.ImagePath;
-
                     this.Id = program.Id;
 
                     dc.tblPrograms.Add(program);
@@ -132,7 +131,7 @@ namespace TSS.ProgDec.BL
                                            p.ImagePath
                                        }).FirstOrDefault();
 
-                        // does the if() go here? if (!null) 
+                     
                         if (results != null)
                         {
                             this.Id = results.Id;
@@ -142,8 +141,6 @@ namespace TSS.ProgDec.BL
                             this.ImagePath = results.ImagePath;
                         }
                             
-
-                       // check if i am missing a bracket in this area? 
                         else
                         {
                             throw new Exception("Row was not found");
@@ -166,10 +163,45 @@ namespace TSS.ProgDec.BL
 
     public class ProgramList : List<Program>
     {
-        /// <summary>
-        /// ///////////////////// check loadbydegreetypeid () 
-        /// </summary>
-        /// 
+        public void LoadByDegreeTypeId(int degreeTypeId)
+        {
+            try
+            {
+                using (ProgDecEntities dc = new ProgDecEntities())
+                {
+                    var results = (from p in dc.tblPrograms
+                                   join dt in dc.tblDegreeTypes on p.DegreeTypeId equals dt.Id
+                                   where p.DegreeTypeId == degreeTypeId
+                                   orderby p.Description
+                                   select new
+                                   {
+                                       p.Id,
+                                       p.DegreeTypeId,
+                                       p.Description,
+                                       DegreeTypeName = dt.Description,
+                                       p.ImagePath
+                                   }).ToList();
+
+
+                    foreach (var s in results)
+                    {
+                        Program program = new Program();
+                        program.Id = s.Id;
+                        program.Description = s.Description;
+                        program.DegreeTypeId = s.DegreeTypeId;
+                        program.DegreeTypeName = s.DegreeTypeName;
+                        program.ImagePath = s.ImagePath;
+
+                        Add(program);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
 
         public void Load()
         {
