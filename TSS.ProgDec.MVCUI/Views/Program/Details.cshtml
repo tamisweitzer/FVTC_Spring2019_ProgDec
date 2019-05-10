@@ -5,39 +5,42 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
 
-<div>
-    <h4>Program</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
+<div class="mt-4">
 
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
+    <div>
+        <h4>Program</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DegreeTypeId)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.DegreeTypeId)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DegreeTypeId)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DegreeTypeName)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DegreeTypeId)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.DegreeTypeName)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DegreeTypeName)
+            </dt>
 
-    </dl>
+            <dd>
+                @Html.DisplayFor(model => model.DegreeTypeName)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

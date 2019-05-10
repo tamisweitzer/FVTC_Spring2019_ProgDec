@@ -20,8 +20,7 @@ namespace TSS.ProgDec.MVCUI.Controllers
 
         #region NonWebAPI
         // GET: Program
-       //  ////////////
-        
+       
         public ActionResult Index()
         {
             if (Authenticate.IsAuthenticated())   

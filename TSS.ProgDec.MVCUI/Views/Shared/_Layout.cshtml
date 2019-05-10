@@ -26,14 +26,12 @@
                     <a class="nav-link" runat="server" href="~/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" runat="server" href="~/About">About</a>
+                    <a class="nav-link" runat="server" href="~/Home/About">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" runat="server" href="~/Contact">Contact</a>
+                    <a class="nav-link" runat="server" href="~/Home/Contact">Contact</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" runat="server" href="~/Admin">Admin</a>
-                </li>
+                
                 <li class="nav-item">
                     <a class="nav-link" runat="server" href="~/Program/">Programs</a>
                 </li>
@@ -46,6 +44,7 @@
                 <li class="nav-item">
                     <a class="nav-link" runat="server" href="~/ProgDec/">Declarations</a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link" runat="server" href="~/Login/Create/">Login</a>
                 </li>
@@ -62,12 +61,15 @@
                 <div class="header rounded-top">
                     <h3>Programs</h3>
                 </div>
+
                 <div class="sidebar-content">
                     @{ Html.RenderAction("Sidebar", "Program"); }
                 </div>
-                <div class="header">
+
+                <div class="header mt-3">
                     <h3>Shopping Cart</h3>
                 </div>
+
                 <div class="sidebar-content">
                     @{ Html.RenderAction("CartDisplay", "ShoppingCart"); }
                 </div>
@@ -78,12 +80,13 @@
                     <h3>@ViewBag.Title</h3>
                 </div>
                 @RenderBody()
-                <hr />
-                <footer>
-                    <p>&copy; @DateTime.Now.Year - My ProgDec Application</p>
-                </footer>
             </div>
+        </div>
 
+        <div class="row">
+            <footer class="container-fluid">
+                <p>&copy; @DateTime.Now.Year - My ProgDec Application</p>
+            </footer>
         </div>
     </div>
     @Scripts.Render("~/bundles/jquery")

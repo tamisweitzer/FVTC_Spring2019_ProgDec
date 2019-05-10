@@ -1,25 +1,27 @@
 ﻿@model IEnumerable<TSS.ProgDec.BL.Program>
 
 
-<table>
 
-    @foreach (var item in Model)
-    {
+    <table>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Description, "Load", "ProgDec", new { id = item.Id }, null)
+                </td>
+            </tr>
+        }
         <tr>
             <td>
-                @Html.ActionLink(item.Description, "Load", "ProgDec", new { id = item.Id }, null)
+                @Html.ActionLink("Show All", "Index", "ProgDec")
             </td>
         </tr>
-    }
-    <tr>
-        <td>
-            @Html.ActionLink("Show All", "Index", "ProgDec")
-        </td>
-    </tr>
 
-    <tr>
-        <td>
-            @Html.ActionLink("Create New", "Create", "ProgDec")
-        </td>
-    </tr>
-</table>
+        <tr>
+            <td>
+                @Html.ActionLink("Create New", "Create", "ProgDec")
+            </td>
+        </tr>
+    </table>
+

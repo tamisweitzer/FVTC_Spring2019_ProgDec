@@ -35,6 +35,15 @@ textarea {
 }
 
 
+.body-content {
+    min-height: calc(100vh - 120px);
+}
+
+footer {
+    background-color: #343a40;
+    padding: 2em 2em 4em 2em;
+    color: rgba(255, 255, 255, 0.5);
+}
 
 /* Change color of nav bar : CSS Gradient.io */
 .bg-dark {
@@ -50,7 +59,7 @@ textarea {
 
 .header h1, .header h2, .header h3 {
     margin: 0;
-    padding: 0 0 0 10px;
+    padding: 0.5em;
     color: white;
     font-family: Helvetica, Arial, sans-serif;
 }
@@ -71,11 +80,11 @@ textarea {
 }
 
 .sidebar-content {
-    margin-top: 2em; 
+    padding: 1em;
 }
 
 .sidebar a {
-    padding: 10px;
+    
     font-size: 0.8em;
 }
 

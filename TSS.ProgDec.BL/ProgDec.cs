@@ -116,11 +116,11 @@ namespace TSS.ProgDec.BL
                 {
                     if (Id >= 0)
                     {
-                        var progDec = (from pd in dc.tblProgDecs
+                      
+                        var results = (from pd in dc.tblProgDecs
                                        join p in dc.tblPrograms on pd.ProgramId equals p.Id
                                        join s in dc.tblStudents on pd.StudentId equals s.Id
                                        where pd.Id == this.Id
-
                                        select new
                                        {
                                            pd.Id,
@@ -132,14 +132,14 @@ namespace TSS.ProgDec.BL
                                            s.LastName
                                        }).FirstOrDefault();
 
-                        if (progDec != null)
+                        if (results != null)
                         {
-                            this.Id = progDec.Id;
-                            this.StudentId = progDec.StudentId;
-                            this.ProgramId = progDec.ProgramId;
-                            this.ChangeDate = progDec.ChangeDate;
-                            this.ProgramName = progDec.Description;
-                            this.StudentName = progDec.FirstName + " " + progDec.LastName;
+                            this.Id = results.Id;
+                            this.StudentId = results.StudentId;
+                            this.ProgramId = results.ProgramId;
+                            this.ChangeDate = results.ChangeDate;
+                            this.ProgramName = results.Description;
+                            this.StudentName = results.FirstName + " " + results.LastName;
                             LoadAdvisors();
                         }
                         else
