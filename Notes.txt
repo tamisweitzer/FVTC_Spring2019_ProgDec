@@ -1,3 +1,9 @@
 
 
 https://foote.visualstudio.com/_git/61472-ASP.Net-Night
+
+Added repo on Github
+https://github.com/tamisweitzer/FVTC_Spring2019_ProgDec
+
+Original repo on Azure DevOps
+https://tamisweitzer.visualstudio.com/
